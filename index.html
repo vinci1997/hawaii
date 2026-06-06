@@ -222,6 +222,39 @@ a.map-link:hover{background:var(--sky);color:#fff}
   .ps-card{width:160px}
   .ps-img{height:110px}
 }
+/* ── FOOD MODALS ── */
+.food-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.food-link { font-size: 11px; font-weight: 700; }
+.food-link a { color: #0077B6; text-decoration: underline; cursor: pointer; }
+.food-link a:hover { color: #0EA5E9; }
+.food-link a.food-rec { color: #E11D48; }
+.food-link a.food-rec:hover { color: #F43F5E; }
+
+.modal-food { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55); z-index: 1000; align-items: center; justify-content: center; animation: fadeIn .2s ease; }
+.modal-food.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-content-food { background: #fff; border-radius: 16px; max-width: 520px; max-height: 75vh; overflow-y: auto; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp .3s ease; }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-header-food { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1.5px solid #E2E8F0; position: sticky; top: 0; background: #fff; }
+.modal-title-food { font-size: 18px; font-weight: 700; color: #1E293B; margin: 0; }
+.modal-close-food { background: none; border: none; font-size: 26px; cursor: pointer; color: #94A3B8; padding: 0 4px; line-height: 1; transition: color .2s; }
+.modal-close-food:hover { color: #1E293B; }
+
+.modal-body-food { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.food-item { background: #F8FAFF; border: 1.5px solid #E0F2FE; border-radius: 10px; padding: 12px; transition: all .2s; display: flex; gap: 12px; align-items: flex-start; }
+.food-item:hover { background: #EFF6FF; border-color: #BAE6FD; transform: translateY(-2px); }
+.food-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+
+.food-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.food-name { font-size: 14px; font-weight: 700; color: #1E293B; }
+.food-type { font-size: 12px; color: #0077B6; font-weight: 600; }
+.food-detail { font-size: 12px; color: #475569; line-height: 1.4; }
+.food-price { font-weight: 700; color: #FB7185; }
+.food-maps-link { font-size: 11px; color: #0077B6; text-decoration: underline; font-weight: 700; margin-top: 6px; display: inline-block; transition: color .2s; }
+.food-maps-link:hover { color: #0EA5E9; }
+
 </style>
 </head>
 <body>
@@ -307,7 +340,10 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">🏖 威基基海灘</div>
         <div class="ev-en">Waikiki Beach · Lunch + Shopping</div>
         <div class="ev-desc">午餐 · 逛街 · 享受夏威夷第一天！碧藍海水配上白沙，後方就是鑽石頭山的壯觀輪廓 🌊</div>
-        <a class="map-link" href="https://maps.google.com/?q=Waikiki+Beach,Honolulu,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Waikiki+Beach,Honolulu,HI" target="_blank">📍 Google Maps</a></div>
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('waikiki_lunch')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -318,7 +354,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-desc">登頂後可俯瞰威基基全景與太平洋！單程約 45 分鐘，建議穿運動鞋，帶足夠的水。</div>
         <div class="reserved">✅ 已預約 · Reserved 16:00–18:00（Parking entry）</div>
         <div class="note">⚠️ 步道最後入場時間 16:30，請勿超過！<br>Trail last entry 16:30 — do not be late!</div>
-        <a class="map-link" href="https://maps.google.com/?q=Diamond+Head+State+Monument,Honolulu,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Diamond+Head+State+Monument,Honolulu,HI" target="_blank">📍 Google Maps</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -372,6 +410,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">☕ Green World Coffee Farm</div>
         <div class="ev-en">Green World Coffee Farm · Opens 07:00</div>
         <div class="ev-desc">品嚐夏威夷在地咖啡，感受農場氣息 🌿</div>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Green+World+Coffee+Farm" target="_blank">📍 Google Maps</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -381,7 +422,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-en">Ka'ena Point State Park · Sea Turtle Watching</div>
         <div class="ev-desc">夏威夷綠蠵龜最常出沒的棲息地，懶洋洋曬太陽的海龜近在眼前，超療癒！</div>
         <div class="note">⚠️ 請勿觸摸海龜，距離至少保持 2 公尺（這是法律規定！）</div>
-        <a class="map-link" href="https://maps.app.goo.gl/5x3DXuT4j4KjPHWQ9" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.app.goo.gl/5x3DXuT4j4KjPHWQ9" target="_blank">📍 Google Maps</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -390,7 +433,10 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">🍤 哈雷瓦小鎮 Hale'iwa Town Center</div>
         <div class="ev-en">Hale'iwa Town Center · Lunch</div>
         <div class="ev-desc">北岸最有名的衝浪小鎮 🏄 必吃：蝦餐車 + Matsumoto Shave Ice 刨冰！</div>
-        <a class="map-link" href="https://maps.google.com/?q=Haleiwa+Town+Center,Oahu,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Haleiwa+Town+Center,Oahu,HI" target="_blank">📍 Google Maps</a></div>
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('haleiwa_lunch')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -400,7 +446,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-en">Polynesian Cultural Center · Opens 12:00</div>
         <div class="ev-desc">看秀 · 文化體驗活動 · 晚宴<br>夏威夷最受歡迎的文化主題樂園，多個南太平洋島嶼展演，超值體驗！</div>
         <div class="reserved">推薦套票 Ali'i Lu'au · US$197.95（含晚餐）</div>
-        <a class="map-link" href="https://maps.google.com/?q=Polynesian+Cultural+Center,Laie,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Polynesian+Cultural+Center,Laie,HI" target="_blank">📍 Google Maps</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -447,7 +495,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">🌿 Ho'omaluhia 植物園</div>
         <div class="ev-en">Ho'omaluhia Botanical Garden · Free Admission · Closes 16:00</div>
         <div class="ev-desc">免費入園 · 停留 2–3 小時 · 車程 40–50 分鐘（from Waikiki）<br>📸 湖邊被 Ko'olau 山脈環抱的如夢美景，IG 打卡勝地！</div>
-        <a class="map-link" href="https://maps.google.com/?q=Hoomaluhia+Botanical+Garden,Kailua,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Hoomaluhia+Botanical+Garden,Kailua,HI" target="_blank">📍 Google Maps</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -455,6 +505,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-time">12:00 — 13:30</div>
         <div class="ev-zh">🍽 午餐（彈性）</div>
         <div class="ev-en">Lunch · Restaurant 604 (10:30–21:00)</div>
+        <div class="food-links">
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('pearlharbor_lunch')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -462,12 +515,16 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-time">13:30 — 18:00</div>
         <div class="ev-zh">⚓ 珍珠港歷史遺址</div>
         <div class="ev-en">Pearl Harbor National Memorial</div>
-        <a class="map-link" href="https://maps.google.com/?q=Pearl+Harbor,Honolulu,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Pearl+Harbor,Honolulu,HI" target="_blank">📍 Google Maps</a></div>
+        </div>
         <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
           <div class="act-item">
             <div class="act-item-title">⚓ 密蘇里號戰艦 USS Missouri Battleship</div>
             <div class="reserved">✅ 已預約 · Reserved 08:00–16:00（最後入場 15:00）</div>
-            <a class="map-link" href="https://maps.google.com/?q=USS+Missouri+Battleship,Pearl+Harbor,HI" target="_blank">📍 Google Maps</a>
+            <div class="food-links">
+              <div class="food-link"><a href="https://maps.google.com/?q=USS+Missouri+Battleship,Pearl+Harbor,HI" target="_blank">📍 Google Maps</a></div>
+            </div>
           </div>
           <div class="act-item">
             <div class="act-item-title">⚓ 亞利桑那號紀念館 USS Arizona Memorial（免費）</div>
@@ -481,7 +538,10 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-time">晚餐</div>
         <div class="ev-zh">🐟 Maguro Spot 夏威夷蓋飯</div>
         <div class="ev-en">Maguro Spot Hawaiian Rice Bowl (10:00–20:30)</div>
-        <a class="map-link" href="https://maps.app.goo.gl/jhBNVEBLtXf55QXE6" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Maguro+Spot" target="_blank">📍 Google Maps</a></div>
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('pearlharbor_dinner')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -527,7 +587,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-time">08:30 — 16:00</div>
         <div class="ev-zh">🐴 古蘭尼牧場 Kualoa Ranch</div>
         <div class="ev-en">Kualoa Ranch — Jurassic Park filming location!</div>
-        <a class="map-link" href="https://maps.google.com/?q=Kualoa+Ranch,Kailua,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Kualoa+Ranch,Kailua,HI" target="_blank">📍 Google Maps</a></div>
+        </div>
         <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
           <div class="act-item">
             <div class="act-item-title">🐴 08:30 · 騎馬體驗（約 2 小時）</div>
@@ -555,6 +617,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-time">晚餐</div>
         <div class="ev-zh">🍹 Waikiki 用餐 + 海灘欣賞煙火</div>
         <div class="ev-en">Dinner in Waikiki + Watch fireworks from the beach</div>
+        <div class="food-links">
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('waikiki_dinner')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -599,10 +664,14 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-desc">
           🏛 <strong>夏威夷州議會大廈</strong> — 八根棕櫚柱造型，象徵八個大島<br><br>
           👑 <strong>卡美哈梅哈大王銅像</strong> — 夏威夷第一位統一群島的國王，六月獻花季
-          <a class="map-link" href="https://maps.google.com/?q=King+Kamehameha+Statue,Honolulu,HI" target="_blank" style="display:inline-block;margin:4px 0 0">📍 Google Maps</a><br><br>
+          <div class="food-links" style="margin:8px 0">
+            <div class="food-link"><a href="https://maps.google.com/?q=King+Kamehameha+Statue,Honolulu,HI" target="_blank">📍 Google Maps</a></div>
+          </div><br>
           🏰 <strong>伊奧拉尼皇宮</strong> — 1882–1893 夏威夷王國最後皇室官邸，美國唯一的皇宮
         </div>
-        <a class="map-link" href="https://maps.google.com/?q=Iolani+Palace,Honolulu,HI" target="_blank">📍 伊奧拉尼皇宮 Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Iolani+Palace,Honolulu,HI" target="_blank">📍 伊奧拉尼皇宮 Maps</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -611,7 +680,10 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">🛍 Ala Moana Center 購物中心</div>
         <div class="ev-en">Ala Moana Center — World's largest open-air shopping mall!</div>
         <div class="ev-desc">世界最大露天購物中心，超過 350 家品牌 · 最後採購伴手禮的好時機！</div>
-        <a class="map-link" href="https://maps.google.com/?q=Ala+Moana+Center,Honolulu,HI" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Ala+Moana+Center,Honolulu,HI" target="_blank">📍 Google Maps</a></div>
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('alamoana')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -719,6 +791,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
           抵達弘大後：飯店入住 · 弘大美食 &amp; 逛街<br>
           <span style="font-size:12px;color:var(--text-light)">Hotel check-in · Hongdae food &amp; shopping</span>
         </div>
+        <div class="food-links" style="margin-top:10px">
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('hongdae_dinner')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -768,7 +843,10 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">☕ 早餐 · 두유라이크잇</div>
         <div class="ev-en">Breakfast · Do You Like It Cafe</div>
         <div class="ev-desc">경의선숲길 附近 · 早餐後直接散步超方便！</div>
-        <a class="map-link" href="https://maps.google.com/?q=Do+You+Like+It+Cafe,Seoul,Korea" target="_blank">📍 Google Maps</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Do+You+Like+It+Cafe,Seoul,Korea" target="_blank">📍 Google Maps</a></div>
+          <div class="food-link"><a class="food-rec" onclick="openFoodModal('seoul_breakfast')">🍽 美食推薦</a></div>
+        </div>
       </div>
     </div>
     <div class="tl-item"><div class="tl-dot"></div>
@@ -777,7 +855,9 @@ a.map-link:hover{background:var(--sky);color:#fff}
         <div class="ev-zh">🌿 京義線森林公園 + 書街</div>
         <div class="ev-en">Gyeongui Line Forest Park · 연트럴파크</div>
         <div class="ev-desc">沿廢棄鐵路改建的 6.3km 綠色步道，又稱「首爾版中央公園」🚶<br>一路逛獨立書店、文青咖啡廳、延南洞小巷</div>
-        <a class="map-link" href="https://maps.google.com/?q=Gyeongui+Line+Forest+Park,Seoul,Korea" target="_blank">📍 弘大入口 3 號出口</a>
+        <div class="food-links">
+          <div class="food-link"><a href="https://maps.google.com/?q=Gyeongui+Line+Forest+Park,Seoul,Korea" target="_blank">📍 弘大入口 3 號出口</a></div>
+        </div>
         <div class="scroll-hint" style="margin-top:10px">← 景點預覽 →</div>
         <div class="photo-scroll-wrap" style="margin-top:6px">
           <div class="photo-scroll">
@@ -859,17 +939,34 @@ a.map-link:hover{background:var(--sky);color:#fff}
       <div class="sc-value" id="totalUSD2">$0.00</div>
       <div class="sc-sub" id="entryCount">0 筆記錄</div>
     </div>
-    <div class="summary-card cat-card" id="catFood"><div class="sc-label" style="color:var(--text-mid)">🍽 餐飲</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
-    <div class="summary-card cat-card" id="catAttraction"><div class="sc-label" style="color:var(--text-mid)">🎡 景點</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
-    <div class="summary-card cat-card" id="catTransport"><div class="sc-label" style="color:var(--text-mid)">🚌 交通</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
-    <div class="summary-card cat-card" id="catShopping"><div class="sc-label" style="color:var(--text-mid)">🛍 購物</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
-    <div class="summary-card cat-card" id="catHotel"><div class="sc-label" style="color:var(--text-mid)">🏨 住宿</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
-    <div class="summary-card cat-card" id="catOther"><div class="sc-label" style="color:var(--text-mid)">📦 其他</div><div class="sc-value" style="font-size:20px;color:var(--text)">$0</div></div>
+  </div>
+
+  <!-- Day 1-7 頁籤 -->
+  <div style="display:flex;gap:6px;margin:20px 0;overflow-x:auto;padding:0 16px;flex-wrap:nowrap">
+    <button id="dayTab1" class="budget-tab-btn active" onclick="showDay(1)" style="flex-shrink:0;padding:8px 12px;border:none;background:#0077B6;color:#fff;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 1</button>
+    <button id="dayTab2" class="budget-tab-btn" onclick="showDay(2)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 2</button>
+    <button id="dayTab3" class="budget-tab-btn" onclick="showDay(3)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 3</button>
+    <button id="dayTab4" class="budget-tab-btn" onclick="showDay(4)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 4</button>
+    <button id="dayTab5" class="budget-tab-btn" onclick="showDay(5)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 5</button>
+    <button id="dayTab6" class="budget-tab-btn" onclick="showDay(6)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 6</button>
+    <button id="dayTab7" class="budget-tab-btn" onclick="showDay(7)" style="flex-shrink:0;padding:8px 12px;border:none;background:#E2E8F0;color:#64748B;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s">Day 7</button>
   </div>
 
   <div class="add-expense-box">
     <div class="add-expense-title">➕ 新增支出</div>
     <div class="form-row">
+      <div class="form-group">
+        <label>日期</label>
+        <select class="form-select" id="expDay">
+          <option value="1">Day 1 · 6/16</option>
+          <option value="2">Day 2 · 6/17</option>
+          <option value="3">Day 3 · 6/18</option>
+          <option value="4">Day 4 · 6/19</option>
+          <option value="5">Day 5 · 6/20</option>
+          <option value="6">Day 6 · 6/21</option>
+          <option value="7">Day 7 · 6/22</option>
+        </select>
+      </div>
       <div class="form-group">
         <label>類別</label>
         <select class="form-select" id="expCat">
@@ -931,13 +1028,31 @@ let expenses=JSON.parse(localStorage.getItem('hawaii_expenses')||'[]');
 let rate=parseFloat(localStorage.getItem('hawaii_rate')||'32');
 document.getElementById('rateInput').value=rate;
 
+// 自動獲取即時匯率
+function fetchExchangeRate(){
+  fetch('https://api.exchangerate.host/latest?base=USD&symbols=TWD')
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.rates && data.rates.TWD){
+        const newRate=data.rates.TWD;
+        rate=newRate;
+        document.getElementById('rateInput').value=newRate.toFixed(2);
+        save();
+        renderAll();
+        console.log(`✅ 匯率已更新: 1 USD = ${newRate.toFixed(2)} TWD (${new Date().toLocaleString('zh-TW')})`);
+      }
+    })
+    .catch(err=>console.log('⚠️ 無法獲取即時匯率，使用本地匯率'));
+}
+
 function save(){localStorage.setItem('hawaii_expenses',JSON.stringify(expenses));localStorage.setItem('hawaii_rate',String(rate));}
 function updateRate(){const v=parseFloat(document.getElementById('rateInput').value);if(!isNaN(v)&&v>0){rate=v;save();renderAll();}}
 function addExpense(){
+  const day=parseInt(document.getElementById('expDay').value);
   const cat=document.getElementById('expCat').value;
   const amt=parseFloat(document.getElementById('expAmt').value);
   if(isNaN(amt)||amt<=0){alert('請輸入有效的美金金額！');return;}
-  expenses.unshift({id:Date.now(),cat,usd:amt});
+  expenses.push({id:Date.now(),day,cat,usd:amt});
   save();
   document.getElementById('expAmt').value='';
   renderAll();
@@ -946,31 +1061,428 @@ function deleteExpense(id){expenses=expenses.filter(e=>e.id!==id);save();renderA
 function clearAll(){if(!expenses.length)return;if(confirm('確定要清除所有支出記錄嗎？')){expenses=[];save();renderAll();}}
 function fmt(n){return n.toFixed(2);}
 function fmtTWD(n){return Math.round(n*rate).toLocaleString();}
+let currentDay=1;
 function renderAll(){
   const total=expenses.reduce((s,e)=>s+e.usd,0);
-  const ct={food:0,attraction:0,transport:0,shopping:0,hotel:0,other:0};
-  expenses.forEach(e=>{ct[e.cat]=(ct[e.cat]||0)+e.usd;});
   document.getElementById('totalTWD').textContent='NT$'+fmtTWD(total);
   document.getElementById('totalUSDb').textContent='USD $'+fmt(total);
   document.getElementById('totalUSD2').textContent='$'+fmt(total);
   document.getElementById('entryCount').textContent=expenses.length+' 筆記錄';
-  Object.keys(CAT_IDS).forEach(c=>{document.getElementById(CAT_IDS[c]).querySelector('.sc-value').textContent='$'+fmt(ct[c]);});
+
+  const dayExp=expenses.filter(e=>e.day===currentDay).sort((a,b)=>a.id-b.id);
   const el=document.getElementById('expenseList');
-  if(!expenses.length){
+  if(!dayExp.length){
     el.innerHTML='<div class="expense-empty">尚未新增任何支出紀錄<br><span style="font-size:11px">在上方選擇類別並輸入美金金額 💱</span></div>';
     return;
   }
-  el.innerHTML=expenses.map(e=>`
-    <div class="expense-item">
-      <span class="exp-cat-badge ${CAT_CLS[e.cat]}">${CAT_LABELS[e.cat]}</span>
-      <div class="exp-amounts">
-        <div class="exp-usd">$ ${fmt(e.usd)}</div>
-        <div class="exp-twd">NT$ ${fmtTWD(e.usd)}</div>
-      </div>
-      <button class="btn-del" onclick="deleteExpense(${e.id})" title="刪除">✕</button>
-    </div>`).join('');
+  el.innerHTML=dayExp.map(e=>`<div class="expense-item">
+    <span class="exp-cat-badge ${CAT_CLS[e.cat]}">${CAT_LABELS[e.cat]}</span>
+    <div class="exp-amounts"><div class="exp-usd">$ ${fmt(e.usd)}</div><div class="exp-twd">NT$ ${fmtTWD(e.usd)}</div></div>
+    <button class="btn-del" onclick="deleteExpense(${e.id})" title="刪除">✕</button></div>`).join('');
 }
+function showDay(day){
+  currentDay=day;
+  document.querySelectorAll('.budget-tab-btn').forEach(b=>{b.style.background='#E2E8F0';b.style.color='#64748B';});
+  document.getElementById('dayTab'+day).style.background='#0077B6';
+  document.getElementById('dayTab'+day).style.color='#fff';
+  document.getElementById('expDay').value=day;
+  renderAll();
+}
+function clearDay(day){
+  const dayExp=expenses.filter(e=>e.day===day);
+  if(!dayExp.length)return;
+  if(confirm('確定要清除此天的所有支出記錄嗎？')){
+    expenses=expenses.filter(e=>e.day!==day);
+    save();
+    renderAll();
+  }
+}
+// 頁面載入時自動獲取最新匯率
+fetchExchangeRate();
 renderAll();
+
+// ── FOOD MODAL ──
+function openFoodModal(id) {
+  const modal = document.getElementById(id + '-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeFoodModal(id) {
+  const modal = document.getElementById(id + '-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+// 點擊背景關閉所有模態框
+document.addEventListener('click', function(e) {
+  if (e.target.classList && e.target.classList.contains('modal-food')) {
+    e.target.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+});
+
 </script>
+<div id="waikiki_lunch-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('waikiki_lunch')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 威基基海灘 · 午餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('waikiki_lunch')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLlfBH4urCTZNzx80ePn6q8bQKoVL2cgjeWw&s" alt="Royal Lobster" >
+        <div class="food-info">
+          <div class="food-name">Royal Lobster</div>
+          <div class="food-type">🦞 海鮮</div>
+          <div class="food-detail">龍蝦、海鮮</div>
+          <a href="https://maps.google.com/?q=Royal+Lobster+Waikiki" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Kai Coffee Hawaii</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">夏威夷咖啡</div>
+          <a href="https://maps.google.com/?q=Kai+Coffee" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Kona Coffee Purveyors</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">Kona咖啡豆</div>
+          <a href="https://maps.google.com/?q=Kona+Coffee" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2W0220aSYm8a6gbRff8i-8Mu1JnhVH--0Kw&s" alt="EbiNomi" >
+        <div class="food-info">
+          <div class="food-name">EbiNomi</div>
+          <div class="food-type">🍤 日式</div>
+          <div class="food-detail">蝦料理</div>
+          <a href="https://maps.google.com/?q=EbiNomi+Waikiki" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://i.fooday.app/8iEAAqfoUDFPC3bezSAHoh?1725698211" alt="Heavenly Island" >
+        <div class="food-info">
+          <div class="food-name">Heavenly Island</div>
+          <div class="food-type">🏝️ 夏威夷</div>
+          <div class="food-detail">蓋飯、Poke</div>
+          <a href="https://maps.google.com/?q=Heavenly+Island" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmVEUvZk6hB6CpD5qL6syp7fKpub_3EFbqxA&s" alt="Eggs n Things" >
+        <div class="food-info">
+          <div class="food-name">Eggs n Things</div>
+          <div class="food-type">🥞 早午餐</div>
+          <div class="food-detail">超蓬鬆鬆餅</div>
+          <a href="https://maps.google.com/?q=Eggs+n+Things" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Leonard's Bakery</div>
+          <div class="food-type">🍩 麵包</div>
+          <div class="food-detail">馬拉薩達</div>
+          <a href="https://maps.google.com/?q=Leonard%27s+Bakery" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Duke's Waikiki</div>
+          <div class="food-type">🌊 海景</div>
+          <div class="food-detail">海鮮蓋飯</div>
+          <a href="https://maps.google.com/?q=Duke%27s+Waikiki" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="haleiwa_lunch-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('haleiwa_lunch')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 哈雷瓦小鎮 · 午餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('haleiwa_lunch')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/6e/bd/f3/caption.jpg?w=1200&h=1200&s=1" alt="Giovanni's Shrimp Truck" >
+        <div class="food-info">
+          <div class="food-name">Giovanni's Shrimp Truck</div>
+          <div class="food-type">🍤 蝦餐車</div>
+          <div class="food-detail">蒜味炸蝦</div>
+          <a href="https://maps.google.com/?q=Giovanni%27s+Shrimp+Truck+Haleiwa" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Matsumoto Shave Ice</div>
+          <div class="food-type">🍧 刨冰</div>
+          <div class="food-detail">彩色刨冰</div>
+          <a href="https://maps.google.com/?q=Matsumoto+Shave+Ice" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="hoomaluhia_lunch-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('hoomaluhia_lunch')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 Ho'omaluhia 植物園 · 午餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('hoomaluhia_lunch')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyx4csDJ8KhpinKCvidqBxSia6FDo4eoyCSA&s" alt="Restaurant 604" >
+        <div class="food-info">
+          <div class="food-name">Restaurant 604</div>
+          <div class="food-type">🍴 夏威夷</div>
+          <div class="food-detail">海鮮、漢堡</div>
+          <a href="https://maps.google.com/?q=Restaurant+604+Kailua" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Ted's Bakery</div>
+          <div class="food-type">🍰 麵包</div>
+          <div class="food-detail">甜點、麵包</div>
+          <a href="https://maps.google.com/?q=Ted%27s+Bakery+Laie" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pearlharbor_lunch-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('pearlharbor_lunch')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 珍珠港 · 午餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('pearlharbor_lunch')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyx4csDJ8KhpinKCvidqBxSia6FDo4eoyCSA&s" alt="Restaurant 604" >
+        <div class="food-info">
+          <div class="food-name">Restaurant 604</div>
+          <div class="food-type">🍴 夏威夷</div>
+          <div class="food-detail">海鮮、漢堡</div>
+          <a href="https://maps.google.com/?q=Restaurant+604+Kailua" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Ted's Bakery</div>
+          <div class="food-type">🍰 麵包</div>
+          <div class="food-detail">甜點、麵包</div>
+          <a href="https://maps.google.com/?q=Ted%27s+Bakery" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pearlharbor_dinner-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('pearlharbor_dinner')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 珍珠港 · 晚餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('pearlharbor_dinner')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://s3-media0.fl.yelpcdn.com/bphoto/p31xbnH6xIej8-M2PsHD9w/o.jpg" alt="Maguro Spot" >
+        <div class="food-info">
+          <div class="food-name">Maguro Spot</div>
+          <div class="food-type">🐟 日式</div>
+          <div class="food-detail">鮪魚蓋飯</div>
+          <a href="https://maps.google.com/?q=Maguro+Spot" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://photos.singleplatform.com/c_limit,w_1334,fl_progressive/c5eddeaa4eee3075067e87430a26117eddd6b240.jpg" alt="Nico's at Pier 38" >
+        <div class="food-info">
+          <div class="food-name">Nico's at Pier 38</div>
+          <div class="food-type">🍙 海鮮</div>
+          <div class="food-detail">日式海鮮丼</div>
+          <a href="https://maps.google.com/?q=Nico%27s+at+Pier+38" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="waikiki_dinner-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('waikiki_dinner')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 Waikiki · 晚餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('waikiki_dinner')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAFVYWnMRi5FpXsp3gjlF7ceS5pwynGQdPnOVZJgZZHAQKQ5U0JMBR6LTsFXOqCFlaasoC48VPSRlTzT58dIjHOrpmsm4JWa8e7XT4oRw2ZM1s9KXmN09XBrf3xNDuXweURV5MJgUg=s1360-w1360-h1020-rw" alt="Tikis Grill & Bar" >
+        <div class="food-info">
+          <div class="food-name">Tikis Grill & Bar</div>
+          <div class="food-type">🔥 燒烤吧</div>
+          <div class="food-detail">海景燒烤、雞尾酒</div>
+          <a href="https://maps.google.com/?q=Tikis+Grill+Bar+Waikiki" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Rum Fire</div>
+          <div class="food-type">🍹 酒吧</div>
+          <div class="food-detail">雞尾酒、海景</div>
+          <a href="https://maps.google.com/?q=Rum+Fire" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="alamoana-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('alamoana')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 Ala Moana Center · 美食推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('alamoana')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://thecitylane.com/wp-content/uploads/2022/08/X1001469.jpg" alt="Harry's Cafe" >
+        <div class="food-info">
+          <div class="food-name">Harry's Cafe</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">早午餐</div>
+          <a href="https://maps.google.com/?q=Harry%27s+Cafe+Ala+Moana" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=400,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/6e964067-7670-40b8-92fd-f4922a287d3b.jpg" alt="Menya le Nood" >
+        <div class="food-info">
+          <div class="food-name">Menya le Nood</div>
+          <div class="food-type">🍜 拉麵</div>
+          <div class="food-detail">豚骨拉麵</div>
+          <a href="https://maps.google.com/?q=Menya+le+Nood" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmVEUvZk6hB6CpD5qL6syp7fKpub_3EFbqxA&s" alt="Eggs n Things" >
+        <div class="food-info">
+          <div class="food-name">Eggs n Things</div>
+          <div class="food-type">🥞 早午餐</div>
+          <div class="food-detail">鬆餅</div>
+          <a href="https://maps.google.com/?q=Eggs+n+Things+Ala+Moana" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Arvo Coffee</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">甜點</div>
+          <a href="https://maps.google.com/?q=Arvo+Coffee" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZXJmzHs3DYtTvAmj12hXqxjwCmN4xCNGEgg&s" alt="The Daley Burger" >
+        <div class="food-info">
+          <div class="food-name">The Daley Burger</div>
+          <div class="food-type">🍔 漢堡</div>
+          <div class="food-detail">新鮮漢堡、薯條</div>
+          <a href="https://maps.google.com/?q=The+Daley+Burger" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://ericgo.com/wp-content/uploads/20200411174057_67.jpg" alt="Highway Inn Kaka'ako" >
+        <div class="food-info">
+          <div class="food-name">Highway Inn Kaka'ako</div>
+          <div class="food-type">🍲 夏威夷菜</div>
+          <div class="food-detail">傳統夏威夷料理</div>
+          <a href="https://maps.google.com/?q=Highway+Inn+Kaka%27ako" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="seoul_breakfast-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('seoul_breakfast')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 首爾 · 早餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('seoul_breakfast')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Do You Like It</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">文青早午餐</div>
+          <a href="https://maps.google.com/?q=Do+You+Like+It+Seoul" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <div class="food-info">
+          <div class="food-name">Café Bene</div>
+          <div class="food-type">☕ 咖啡</div>
+          <div class="food-detail">韓式咖啡廳</div>
+          <a href="https://maps.google.com/?q=Caf%C3%A9+Bene+Hongdae" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="hongdae_dinner-modal" class="modal-food" onclick="if(event.target===this) closeFoodModal('hongdae_dinner')">
+  <div class="modal-content-food">
+    <div class="modal-header-food">
+      <h2 class="modal-title-food">🍽 弘大 · 晚餐推薦</h2>
+      <button class="modal-close-food" onclick="closeFoodModal('hongdae_dinner')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body-food">
+      <div class="food-item">
+        <img src="https://img.poibank.com/05fFEM_Rz491E8PjC1_RGtIXtuw=/W3siZm9ybWF0IjoianBnIn0seyJrZXkiOiJzdWdnZXN0aW9uLzI3NTc0NDQ0Lzc0OTA5MTExLzE3NTE5MDk3MTA1MDEifSx7InJlc2l6ZSI6eyJ3aWR0aCI6IjEwNjcifX1d" alt="Boseung Hall" >
+        <div class="food-info">
+          <div class="food-name">Boseung Hall</div>
+          <div class="food-type">🍲 湯飯</div>
+          <div class="food-detail">豬肉湯飯</div>
+          <a href="https://maps.google.com/?q=Boseung+Hall+Hongdae" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8JuFvPQ8nHUzwyvV-XTJOwhjQ6K52G0w2aw&s" alt="Hongs Zzuggumi" >
+        <div class="food-info">
+          <div class="food-name">Hongs Zzuggumi</div>
+          <div class="food-type">🐙 海鮮</div>
+          <div class="food-detail">烤章魚</div>
+          <a href="https://maps.google.com/?q=Hongs+Zzuggumi" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfWoqK1THds6ORDP9qhmhD5Ut0fV-DPJoiOQ&s" alt="Maple Tree House" >
+        <div class="food-info">
+          <div class="food-name">Maple Tree House</div>
+          <div class="food-type">🔥 烤肉</div>
+          <div class="food-detail">韓式烤肉</div>
+          <a href="https://maps.google.com/?q=Maple+Tree+House" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCGhdgOh6tOCu_rtiokJzgyaW-W3P4SMBQcw&s" alt="홍대 슈퍼프룻" >
+        <div class="food-info">
+          <div class="food-name">홍대 슈퍼프룻</div>
+          <div class="food-type">🍰 甜點</div>
+          <div class="food-detail">鮮果甜點、飲品</div>
+          <a href="https://maps.google.com/?q=Hongdae+Super+Fruit+Seoul" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+      <div class="food-item">
+        <img src="https://ugc-images.catchtable.co.kr/catchtable/shopinfo/sxGRAIFg79jugOBwhQZkHmA/3c09ca54c7f649c993fd73379a513632?resizeType=details500" alt="Hongdae Bar Joseonsiidae" >
+        <div class="food-info">
+          <div class="food-name">Hongdae Bar Joseonsiidae</div>
+          <div class="food-type">🍹 酒吧</div>
+          <div class="food-detail">傳統酒吧、下酒菜</div>
+          <a href="https://maps.google.com/?q=Hongdae+Bar+Joseonsiidae+Seoul" target="_blank" class="food-maps-link">📍 看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
